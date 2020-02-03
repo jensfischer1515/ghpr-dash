@@ -10,6 +10,9 @@
     "express:run": "vue-cli-service express:run"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.4.4",
     "vue": "^2.6.10",
@@ -35,6 +38,7 @@
     "vue-cli-plugin-apollo": "^0.21.3",
     "vue-cli-plugin-bootstrap-vue": "^0.6.0",
     "vue-cli-plugin-express": "^1.0.2",
+    "vue-cli-plugin-fontawesome": "^0.2.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
