@@ -38,6 +38,9 @@ const defaultOptions = {
 
   // Override the way the Authorization header is set
   // getAuth: (tokenName) => ...
+  getAuth: () => {
+    return 'token ' + process.env.VUE_APP_GRAPHQL_TOKEN;
+  },
 
   // Additional ApolloClient options
   // apollo: { ... }
