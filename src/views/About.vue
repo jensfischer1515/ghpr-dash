@@ -1,12 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="repositories">
+    <h1>{{ team }}@{{ organization }} Repositories</h1>
+      <ul>
+        <li v-for="repository in repositories" :key="repository.url">
+          <Repository :organization="organization" :repository="repository" />
+        </li>
+      </ul>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
 import gql from "graphql-tag";
+import Repository from '@/components/Repository.vue'
 
 const pullRequestsQuery = gql`
   query PullRequests(
@@ -94,7 +100,11 @@ const pullRequestsQuery = gql`
 `;
 
 export default {
-  name: "PullRequests",
+  name: "Repositories",
+
+  components: {
+    Repository
+  },
 
   data: function() {
     return {
