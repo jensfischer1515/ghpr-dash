@@ -1,24 +1,37 @@
 <template>
   <div class="pullrequest">
-    <h4><a :href="pullRequest.url" target="_new">{{ pullRequest.title }}</a></h4>
-    <h5>#{{ pullRequest.number }} opened {{ pullRequest.publishedAt }} by {{ pullRequest.author.login }}</h5>
-    <h5>updated {{ pullRequest.updatedAt }}</h5>
+    <h4>#{{ pullRequest.number }} <a :href="pullRequest.url" target="_new">{{ pullRequest.title }}</a></h4>
+    <h5>opened {{ pullRequest.publishedAt | humanTime }} by {{ pullRequest.author.login }}</h5>
+    <h5>updated {{ pullRequest.updatedAt | humanTime }}</h5>
     <h6>
       <span class="commits">{{ pullRequest.commits.totalCount }} commits</span>&nbsp;
       <span class="files">changed {{ pullRequest.changedFiles }} files</span>&nbsp;
       <span class="additions">+{{ pullRequest.additions }}</span>&nbsp;
       <span class="deletions">-{{ pullRequest.deletions }}</span>
     </h6>
-    <h6>from {{ pullRequest.headRef.repository.url }} :: {{ pullRequest.headRef.name }}</h6>
-    <h6>into {{ pullRequest.baseRef.repository.url }} :: {{ pullRequest.baseRef.name }}</h6>
+    <h6>Source: <a :href="pullRequest.headRef.repository.url">{{ pullRequest.headRef.repository.url }}</a> :: {{ pullRequest.headRef.name }}</h6>
+    <h6>Target: <a :href="pullRequest.baseRef.repository.url">{{ pullRequest.baseRef.repository.url }}</a> :: {{ pullRequest.baseRef.name }}</h6>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'PullRequest',
+
   props: {
     pullRequest: Object
+  },
+
+  filters: {
+    humanTime: function (value) {
+      if (!value) return '';
+      const now = moment(new Date());
+      const then = moment(value);
+      const diff = moment.duration(then.diff(now));
+      return diff.humanize(true);       
+    }
   }
 }
 </script>
